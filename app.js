@@ -106,5 +106,6 @@ function winnerPlayer() {
     document.querySelector(`.player-${activePlayer}-panel`).classList.remove('active');
     // document.getElementById(`score-${activePlayer}`).textContent = 'WINNER!';
     document.getElementById(`name-${activePlayer}`).textContent = 'WINNER!';
-    document.querySelector('.dice').style.display = 'none';
+    document.getElementById('dice-1').style.display = 'none';
+    document.getElementById('dice-2').style.display = 'none';
 }
