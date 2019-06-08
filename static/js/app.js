@@ -9,7 +9,6 @@ GAME RULES:
 
 */
 
-
 const player1Panel = document.getElementById('player-1-panel');
 const player2Panel = document.getElementById('player-2-panel');
 const playerPanel = [player1Panel, player2Panel];
@@ -29,40 +28,40 @@ const playerCurrentScore = [player1CurrentScore, player2CurrentScore];
 const dice1 = document.getElementById('dice-1');
 const dice2 = document.getElementById('dice-2');
 
+const btnRoll = document.getElementById('btn-roll');
+const btnHold = document.getElementById('btn-hold');
+const btnNew = document.getElementById('btn-new');
+
+const finalScoreInput = document.getElementById('final-score');
+
 let scores, roundScore, activePlayer, gamePlaying , finalScore;
 
 reset();
 
-document.querySelector('.btn-roll').addEventListener('click', function () {
-    if (gamePlaying) {
-        let dice = Math.floor(Math.random() * 6) + 1;
-        let dice2 = Math.floor(Math.random() * 6) + 1;
-        let diceDOM = document.getElementById('dice-1');
-        let diceDOM2 = document.getElementById('dice-2');
-        diceDOM.style.display = 'block';
-        diceDOM2.style.display = 'block';
-        diceDOM.src = `./static/image/dice-${dice}.png`;
-        diceDOM2.src = `./static/image/dice-${dice2}.png`;
+btnRoll.addEventListener('click', function () {
+    if (!gamePlaying) return;
+  
+    let dice1Point = Math.floor(Math.random() * 6) + 1;
+    let dice2Point = Math.floor(Math.random() * 6) + 1;
 
-        if ( (dice !== 1) || dice2 !== 1 ) {
-            roundScore = roundScore+ dice + dice2;
-            playerCurrentScore[activePlayer].textContent = roundScore;
-        } else {
-            getZeroChangePlayer();
-        }
-    }
+    if (dice1Point === 1 && dice2Point === 1) return getZeroChangePlayer();
+
+    dice1.style.display = 'block';
+    dice2.style.display = 'block';
+    dice1.src = `./static/image/dice-${dice1Point}.png`;
+    dice2.src = `./static/image/dice-${dice2Point}.png`;
+    
+    roundScore = roundScore + dice1Point + dice2Point;
+    playerCurrentScore[activePlayer].textContent = roundScore;
 });
 
-document.querySelector('.btn-hold').addEventListener('click', function () {
+btnHold.addEventListener('click', function () {
     holdScores();
 });
 
-document.querySelector('.btn-new').addEventListener('click', function () {
+btnNew.addEventListener('click', function () {
     reset();
 });
-
-
-
 
 function reset() {
     scores = [0, 0];
@@ -106,12 +105,9 @@ function holdScores() {
     playerScore[activePlayer].textContent = scores[activePlayer];
     roundScore = 0;
     playerCurrentScore[activePlayer].textContent = roundScore;
-    finalScore = document.querySelector('.final-score').value?document.querySelector('.final-score').value:100;
-    if (scores[activePlayer] >= finalScore) {
-        winnerPlayer();
-    } else {
-        changePlayer();
-    }
+    finalScore = finalScoreInput.value ? finalScoreInput.value : 100;
+    if (scores[activePlayer] >= finalScore) return winnerPlayer();
+    changePlayer();
 };
 
 function winnerPlayer() {
