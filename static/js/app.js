@@ -46,8 +46,8 @@ btnRoll.addEventListener('click', function () {
 
     if (dice1Point === 1 && dice2Point === 1) return getZeroChangePlayer();
 
-    dice1.style.display = 'block';
-    dice2.style.display = 'block';
+    dice1.style.visibility = 'visible';
+    dice2.style.visibility = 'visible';
     dice1.src = `./static/image/dice-${dice1Point}.png`;
     dice2.src = `./static/image/dice-${dice2Point}.png`;
     
@@ -68,8 +68,8 @@ function reset() {
     roundScore = 0;
     activePlayer = 0;
     gamePlaying = true;
-    dice1.style.display = 'none';
-    dice2.style.display = 'none';
+    dice1.style.visibility = 'hidden';
+    dice2.style.visibility = 'hidden';
     player1Name.textContent = 'Player 1';
     player2Name.textContent = 'Player 2';
     player1Score.textContent = 0;
@@ -96,8 +96,8 @@ function changePlayer() {
     playerPanel[activePlayer].classList.toggle('active');
     activePlayer = activePlayer === 0 ? 1 : 0;
     playerPanel[activePlayer].classList.toggle('active');
-    dice1.style.display = 'none';
-    dice2.style.display = 'none';
+    dice1.style.visibility = 'hidden';
+    dice2.style.visibility = 'hidden';
 }
 
 function holdScores() {
@@ -115,6 +115,6 @@ function winnerPlayer() {
     playerPanel[activePlayer].classList.add('winner');
     playerPanel[activePlayer].classList.remove('active');
     playerName[activePlayer].textContent = 'WINNER!';
-    dice1.style.display = 'none';
-    dice2.style.display = 'none';
+    dice1.style.visibility = 'hidden';
+    dice2.style.visibility = 'hidden';
 }
