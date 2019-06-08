@@ -26,8 +26,8 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
         let diceDOM2 = document.getElementById('dice-2');
         diceDOM.style.display = 'block';
         diceDOM2.style.display = 'block';
-        diceDOM.src = `dice-${dice}.png`;
-        diceDOM2.src = `dice-${dice2}.png`;
+        diceDOM.src = `./static/image/dice-${dice}.png`;
+        diceDOM2.src = `./static/image/dice-${dice2}.png`;
 
         if ( (dice !== 1) || dice2 !== 1 ) {
             roundScore = roundScore+ dice + dice2;
